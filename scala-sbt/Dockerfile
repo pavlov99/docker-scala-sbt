@@ -1,4 +1,4 @@
-FROM ingeus/ubuntu-base
+FROM ubuntu:14.04
 MAINTAINER Kirill Pavlov <kirill.pavlov@phystech.edu>
 
 # Add sbt repo to sources list
@@ -19,10 +19,9 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 ENV SCALA_VERSION 2.11.7
 ENV SCALA_DEB http://www.scala-lang.org/files/archive/scala-$SCALA_VERSION.deb
 
-RUN \
-    wget --quiet --output-document=scala.deb SCALA_DEB && \
-    dpkg -i scala.deb && \
-    rm -f *.deb
+RUN wget --quiet --output-document=scala.deb SCALA_DEB
+RUN dpkg -i scala.deb
+RUN rm -f *.deb
 
 # Install Scala Build Tool sbt
 apt-get install -y sbt
